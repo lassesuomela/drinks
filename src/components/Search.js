@@ -80,11 +80,11 @@ export default function Search() {
   }
 
   return (
-    <div>
+    <div className="search">
       <form className="row g-2" onSubmit={Search}>
-        <label className="form-label" for="searchInput">Search for a drink</label>
+        <label className="form-label mb-0" for="searchInput">Search by using drinks name</label>
         <div className="col-5">
-          <input className="form-control" type="text" id="searchInput" placeholder="Type your drinks name" autocomplete="off" onChange={e => setSearchTerm(e.target.value)}/>
+          <input className="form-control" type="text" id="searchInput" placeholder="i.e. gin tonic" autocomplete="off" onChange={e => setSearchTerm(e.target.value)}/>
         </div>
         <div className="col-1">
           <button className="btn btn-primary" type="submit">Search</button>

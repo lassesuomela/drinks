@@ -7,15 +7,17 @@ img {
 }
 
 .title {
-  padding-bottom: 2em;
+  padding-bottom: 1em;
+  text-align: center;
+  border-bottom: 2px solid black;
 }
 
 .title h2 {
-  font-size: 2.3em;
+  font-size: 2.6em;
 }
 
 .recipe {
-  padding-top: 2em;
+  padding-top: 1em;
 }
 
 .recipe h4 {
@@ -48,4 +50,8 @@ img {
 
 .ingeridients:last-child{
   padding-left: 4em;
+}
+
+.search {
+  padding-top: 1em;
 }

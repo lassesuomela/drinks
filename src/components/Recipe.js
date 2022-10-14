@@ -37,7 +37,6 @@ export default function Recipe(props) {
         <h4>Instructions</h4>
         <p>{props.instructions}</p>
       </div>
-
     </div>
   )
 }
