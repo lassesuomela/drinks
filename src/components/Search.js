@@ -56,10 +56,7 @@ export default function Search() {
             setIngredients(ingredients => [...ingredients, newIngredient]);
           }
         }
-      }else{
-        alert("Error: " + response.status)
       }
-
     })
     .catch(err => {
       console.log(err);
@@ -74,6 +71,10 @@ export default function Search() {
 
   const Search = (e) => {
     e.preventDefault();
+
+    if(!searchTerm){
+      return;
+    }
 
     Request(SEARCH_BY_NAME_URL + searchTerm);
   }

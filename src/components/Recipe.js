@@ -7,7 +7,7 @@ export default function Recipe(props) {
       <h3>{props.drinkName}</h3>
 
       <div class="drinkAndIngredients">
-        <img src={props.thumbnail} alt="Drink thumbnail" />
+        <img src={props.thumbnail} alt="Drink thumbnail" className="shadow mb-3 rounded" />
 
         <div className="ingeridients">
           <h4>Ingredients</h4>
