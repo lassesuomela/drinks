@@ -25,11 +25,13 @@ export default function Search() {
     measurementsArray.push("strMeasure" + i);
   }
 
-  useEffect(() => {
-    
-    axios.get(RANDOM_URL)
+  const Request = url => {
+
+    console.log("request called");
+    axios.get(url)
     .then(response => {
-      if(response.status === 200){
+
+      if(response.status === 200 && response.data.drinks){
 
         const data = response.data.drinks[0];
 
@@ -55,52 +57,25 @@ export default function Search() {
           }
         }
       }else{
-        alert("Error: " + response)
+        alert("Error: " + response.status)
       }
 
     })
     .catch(err => {
       console.log(err);
     })
+  }
+
+  useEffect(() => {
+
+    Request(RANDOM_URL);
 
   }, [])
 
   const Search = (e) => {
     e.preventDefault();
 
-    axios.get(SEARCH_BY_NAME_URL + searchTerm)
-    .then(response => {
-      if(response.status === 200){
-        const data = response.data.drinks[0];
-
-        console.log(data)
-        setDrinkName(data.strDrink);
-        setThumbUrl(data.strDrinkThumb);
-        setGlass(data.strGlass);
-        setInstructions(data.strInstructions);
-        
-        if(data.strTags){
-          setTags(data.strTags.split(","));
-        }
-
-        setIngredients([]);
-
-        for (let i = 0; i < ingredientsArray.length; i++) {
-
-          if(data[ingredientsArray[i]] && data[measurementsArray[i]]){
-            const newIngredient = data[ingredientsArray[i]] + " " + data[measurementsArray[i]];
-            setIngredients(ingredients => [...ingredients, newIngredient]);
-          }
-        }
-
-      }else{
-        alert("Error: " + response)
-      }
-
-    })
-    .catch(err => {
-      console.log(err);
-    })
+    Request(SEARCH_BY_NAME_URL + searchTerm);
   }
 
   return (
@@ -113,7 +88,6 @@ export default function Search() {
         <div className="col-1">
           <button className="btn btn-primary" type="submit">Search</button>
         </div>
-
       </form>
 
       <Recipe thumbnail={thumbUrl} drinkName={drinkName} glass={glass} ingredients={ingredients} instructions={instructions} tags={tags} />
