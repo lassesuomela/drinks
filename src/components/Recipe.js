@@ -7,6 +7,14 @@ export default function Recipe(props) {
       <h3>{props.drinkName}</h3>
 
       <img src={props.thumbnail} alt="Drink thumbnail" />
+
+      <div class="tags">
+      {
+        props.tags.map(tag =>(
+          <span class="badge rounded-pill bg-dark">{tag}</span>
+        ))
+      }
+      </div>
         
       <div>
         <h4>Glass</h4>

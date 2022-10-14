@@ -15,10 +15,9 @@ export default function Search() {
   const [glass, setGlass] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState("");
+  const [tags, setTags] = useState([""]);
 
   useEffect(() => {
-
-    console.log('i fire once');
 
     let ingredientsArray = [];
     let measurementsArray = [];
@@ -40,12 +39,15 @@ export default function Search() {
         setGlass(data.strGlass);
         setInstructions(data.strInstructions);
 
-        for (let i = 0; i < ingredientsArray.length; i++) {
+        if(data.strTags){
+          setTags(data.strTags.split(","));
+          console.log(tags);
+        }
 
+        for (let i = 0; i < ingredientsArray.length; i++) {
           if(data[ingredientsArray[i]] && data[measurementsArray[i]]){
 
             const newIngredient = data[ingredientsArray[i]] + " " + data[measurementsArray[i]];
-            console.log(newIngredient);
             setIngredients(ingredients => [...ingredients, newIngredient]);
           }
         }
@@ -68,10 +70,17 @@ export default function Search() {
       if(response.status === 200){
         const data = response.data.drinks[0];
 
+        console.log(data)
         setDrinkName(data.strDrink);
-        setThumbUrl(data.strDrinkThumb + "/preview");
+        setThumbUrl(data.strDrinkThumb);
         setGlass(data.strGlass);
         setInstructions(data.strInstructions);
+
+        if(data.strTags){
+          setTags(data.strTags.split(","));
+          console.log(tags);
+        }
+
       }else{
         alert("Error: " + response)
       }
@@ -87,7 +96,7 @@ export default function Search() {
       <form className="row g-2" onSubmit={Search}>
         <label className="form-label" for="searchInput">Search for a drink</label>
         <div className="col-5">
-          <input className="form-control" type="text" id="searchInput" placeholder="Type your drinks name" onChange={e => setSearchTerm(e.target.value)}/>
+          <input className="form-control" type="text" id="searchInput" placeholder="Type your drinks name" autocomplete="off" onChange={e => setSearchTerm(e.target.value)}/>
         </div>
         <div className="col-1">
           <button className="btn btn-primary" type="submit">Search</button>
@@ -95,7 +104,7 @@ export default function Search() {
 
       </form>
 
-      <Recipe thumbnail={thumbUrl} drinkName={drinkName} glass={glass} ingredients={ingredients} instructions={instructions}/>
+      <Recipe thumbnail={thumbUrl} drinkName={drinkName} glass={glass} ingredients={ingredients} instructions={instructions} tags={tags} />
     </div>
   )
 }
