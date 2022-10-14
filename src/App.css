@@ -31,3 +31,21 @@ img {
   margin-right: 0.5em;
   margin-top: 1em;
 }
+
+.drinkAndIngredients {
+  padding-top: 1em;
+  display: flex;
+}
+
+.ingeridients {
+  padding-top: 0em;
+  padding-left: 2em;
+}
+
+.ingeridients h4{
+  padding: 0em;
+}
+
+.ingeridients:last-child{
+  padding-left: 4em;
+}

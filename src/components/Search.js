@@ -17,16 +17,16 @@ export default function Search() {
   const [instructions, setInstructions] = useState("");
   const [tags, setTags] = useState([""]);
 
+  let ingredientsArray = [];
+  let measurementsArray = [];
+
+  for (let i = 1; i <= 15; i++) {
+    ingredientsArray.push("strIngredient" + i);
+    measurementsArray.push("strMeasure" + i);
+  }
+
   useEffect(() => {
-
-    let ingredientsArray = [];
-    let measurementsArray = [];
     
-    for (let i = 1; i <= 15; i++) {
-      ingredientsArray.push("strIngredient" + i);
-      measurementsArray.push("strMeasure" + i);
-    }
-
     axios.get(RANDOM_URL)
     .then(response => {
       if(response.status === 200){
@@ -41,12 +41,15 @@ export default function Search() {
 
         if(data.strTags){
           setTags(data.strTags.split(","));
-          console.log(tags);
+        }else{
+          setTags(["No tags"]);
         }
 
-        for (let i = 0; i < ingredientsArray.length; i++) {
-          if(data[ingredientsArray[i]] && data[measurementsArray[i]]){
+        setIngredients([]);
 
+        for (let i = 0; i < ingredientsArray.length; i++) {
+
+          if(data[ingredientsArray[i]] && data[measurementsArray[i]]){
             const newIngredient = data[ingredientsArray[i]] + " " + data[measurementsArray[i]];
             setIngredients(ingredients => [...ingredients, newIngredient]);
           }
@@ -75,10 +78,19 @@ export default function Search() {
         setThumbUrl(data.strDrinkThumb);
         setGlass(data.strGlass);
         setInstructions(data.strInstructions);
-
+        
         if(data.strTags){
           setTags(data.strTags.split(","));
-          console.log(tags);
+        }
+
+        setIngredients([]);
+
+        for (let i = 0; i < ingredientsArray.length; i++) {
+
+          if(data[ingredientsArray[i]] && data[measurementsArray[i]]){
+            const newIngredient = data[ingredientsArray[i]] + " " + data[measurementsArray[i]];
+            setIngredients(ingredients => [...ingredients, newIngredient]);
+          }
         }
 
       }else{
