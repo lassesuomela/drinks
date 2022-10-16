@@ -8,12 +8,13 @@ Fetches drink recipies from [Cocktail database](https://www.thecocktaildb.com). 
 ## How to run
 
 - `npm i` to install dependencies
-- `npm start` to start the programg on [http://localhost:3000](http://localhost:3000)
+- `npm start` to start the program on [http://localhost:3000](http://localhost:3000)
 
 ---
 ## Screenshots
 
 Random drink that is fetched on page load
 ![Random drink](images/random.png)
-Specific drink that is fetched when user searches
+
+Specific drink that is fetched when user searches for a drink
 ![Specific drink](images/specific.png)
